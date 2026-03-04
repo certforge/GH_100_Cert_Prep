@@ -1,0 +1,23 @@
+version: 2
+
+updates:
+  # Keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    # Automatically add labels to Dependabot PRs
+    labels:
+      - "dependencies"
+      - "github-actions"
+    # Target these reviewers
+    reviewers:
+      - "gobinathm"
+    # Limit open PRs to reduce noise
+    open-pull-requests-limit: 5
+    # Commit message prefix for Actions updates
+    commit-message:
+      prefix: "chore(actions)"
