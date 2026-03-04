@@ -2,6 +2,10 @@
 
 A comprehensive study repository for the **GH-100: GitHub Administration** certification exam. This repository provides structured study notes, hands-on labs, practice questions, and quick-reference materials aligned to the official exam domain weights.
 
+> **Last Updated:** March 2026
+> **Exam Version Covered:** GH-100 (as of Q1 2026 — [official objectives](https://learn.microsoft.com/en-us/credentials/certifications/github-administration/))
+> If you notice outdated content, please [open an issue](../../issues) or submit a PR.
+
 ---
 
 ## Exam Overview
@@ -16,6 +20,7 @@ A comprehensive study repository for the **GH-100: GitHub Administration** certi
 | Passing Score | 750 / 1000 |
 | Language | English |
 | Prerequisite Knowledge | GitHub fundamentals, basic Linux/CLI, networking concepts |
+| Content Version | Q1 2026 |
 
 ---
 
