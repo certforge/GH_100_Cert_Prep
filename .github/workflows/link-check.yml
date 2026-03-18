@@ -67,7 +67,7 @@ jobs:
         if: >
           failure() &&
           github.event_name == 'schedule'
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: 'Link Check: Broken links detected'
           content-filepath: ./lychee/out.md
