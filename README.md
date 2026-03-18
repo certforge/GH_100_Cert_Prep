@@ -118,11 +118,20 @@ GH_100_Cert_Prep/
 ├── .github/
 │   ├── SECURITY.md
 │   ├── dependabot.yml
+│   ├── pull_request_template.md
+│   ├── ISSUE_TEMPLATE/
 │   └── workflows/
-│       └── link-check.yml
+│       ├── link-check.yml
+│       └── lab-verification.yml
+│
+├── LAB-VERIFICATION.md               # Fork-only lab workflow guide
+├── lab-submissions/                  # Evidence files for forked lab PRs
+│   └── TEMPLATE.md
 │
 └── scripts/
-    └── README.md
+    ├── README.md
+    └── lab/
+        └── verify-pr.sh
 ```
 
 ---
@@ -177,6 +186,62 @@ GH_100_Cert_Prep/
 5. **Answer practice questions** — use the dedicated `practice-questions/` directory by domain
 6. **Take a mock exam** — use `mocks/full-mock-exam-01.md` for timed review
 7. **Use the quick reference** — print or bookmark `QUICK-REFERENCE.md` for last-minute review
+
+---
+
+## Using the Lab Verification Workflow
+
+The Actions-based lab verification flow is designed to work only in a **fork** of this repository.
+
+### Why Fork-Only?
+
+- The upstream repo is the shared study source.
+- Lab verification is for your own sandbox, training cohort fork, or internal classroom copy.
+- The verification workflow checks whether the repository itself is a fork and exits early in the upstream repo.
+
+### Fork Workflow
+
+1. **Fork this repository** to your own GitHub account or training organization.
+2. **Enable Actions in the fork** if GitHub prompts you to do so.
+3. **Open a lab issue** in the fork using the `GH-100 Lab Exercise` issue form.
+4. **Create a branch** for your lab work and complete the exercise in the fork.
+5. **Add a submission file** under `lab-submissions/<lab-id>/` using `lab-submissions/TEMPLATE.md`.
+6. **Open a pull request** in the fork using the built-in PR template.
+7. **Fill in the PR metadata**:
+   - `Lab-ID: <official-lab-id>`
+   - `Issue: #<number>`
+   - `Validation-Evidence: <value>`
+8. **Wait for the `GH-100 Lab Verification` workflow** to validate the PR structure and evidence.
+
+### Official Lab IDs
+
+- `domain-1-enterprise-support`
+- `domain-2-identity-authentication`
+- `domain-3-deployment-licensing`
+- `domain-4-access-permissions`
+- `domain-5-security-compliance`
+- `domain-6-github-actions`
+
+### What the Workflow Checks
+
+- the repo is a fork
+- the PR body includes the required `Lab-ID`, `Issue`, and `Validation-Evidence` fields
+- a markdown evidence file was added or changed under the correct `lab-submissions/<lab-id>/` folder
+- the submission file includes the required sections:
+  - `## Summary`
+  - `## Commands`
+  - `## Screenshots or Artifacts`
+  - `## Outcome`
+- the submission includes domain-appropriate evidence keywords or changed files
+
+### What It Does Not Fully Validate
+
+- live enterprise or organization settings outside the repo
+- SAML, SCIM, EMU, or GHES administration performed in external systems
+- audit log streaming delivery to third-party services
+- UI-only changes without screenshots or exported evidence
+
+For those steps, include screenshots, command output, JSON exports, or reviewer notes in the submission file and PR.
 
 ---
 
