@@ -1,10 +1,11 @@
 # GH-100: GitHub Administration Certification Prep
 
-A comprehensive study repository for the **GH-100: GitHub Administration** certification exam. This repository provides structured study notes, hands-on labs, practice questions, and quick-reference materials aligned to the official exam domain weights.
+A comprehensive study repository for the **GH-100: GitHub Administration** certification exam. This repository provides structured study notes, hands-on labs, practice questions, mock exams, cheatsheets, and quick-reference materials aligned to the official six-domain exam blueprint.
 
 > **Last Updated:** March 2026
 > **Exam Version Covered:** GH-100 (as of Q1 2026 — [official objectives](https://learn.microsoft.com/en-us/credentials/certifications/github-administration/))
 > If you notice outdated content, please [open an issue](../../issues) or submit a PR.
+> **Blueprint source of truth used in this repo:** the Microsoft Learn GH-100 certification page, verified on **March 18, 2026**.
 
 ---
 
@@ -83,6 +84,37 @@ GH_100_Cert_Prep/
 │   ├── 05-security-compliance/README.md
 │   └── 06-github-actions/README.md
 │
+├── labs/
+│   ├── 01-enterprise-support.md
+│   ├── 02-identity-authentication.md
+│   ├── 03-deployment-licensing.md
+│   ├── 04-access-permissions.md
+│   ├── 05-security-compliance.md
+│   ├── 06-github-actions.md
+│   └── README.md
+│
+├── cheatsheets/
+│   ├── domain-1-enterprise-support.md
+│   ├── domain-2-identity-authentication.md
+│   ├── domain-3-deployment-licensing.md
+│   ├── domain-4-access-permissions.md
+│   ├── domain-5-security-compliance.md
+│   └── domain-6-github-actions.md
+│
+├── practice-questions/
+│   ├── domain-1-enterprise-support.md
+│   ├── domain-2-identity-authentication.md
+│   ├── domain-3-deployment-licensing.md
+│   ├── domain-4-access-permissions.md
+│   ├── domain-5-security-compliance.md
+│   ├── domain-6-github-actions.md
+│   └── README.md
+│
+├── mocks/
+│   ├── full-mock-exam-01.md
+│   └── answer-keys/
+│       └── mock-exam-01-answers.md
+│
 ├── .github/
 │   ├── SECURITY.md
 │   ├── dependabot.yml
@@ -140,9 +172,32 @@ GH_100_Cert_Prep/
 
 1. **Start with exam metadata** — understand what the exam tests before diving into content
 2. **Read domain docs in weight order** — Domain 5, then 4, then 6, then 2, then 1 and 3
-3. **Do the labs** — hands-on practice reinforces concepts tested in the exam
-4. **Use the quick reference** — print or bookmark `QUICK-REFERENCE.md` for last-minute review
-5. **Answer practice questions** — each domain doc includes 5-10 practice questions
+3. **Do the labs** — use `labs/` plus the linked `demos/` assets for hands-on practice
+4. **Use the cheatsheets** — review one cheatsheet after each domain study session
+5. **Answer practice questions** — use the dedicated `practice-questions/` directory by domain
+6. **Take a mock exam** — use `mocks/full-mock-exam-01.md` for timed review
+7. **Use the quick reference** — print or bookmark `QUICK-REFERENCE.md` for last-minute review
+
+---
+
+## Official Domain Coverage
+
+This repo is aligned to the **6 official GH-100 domains** shown on the Microsoft Learn certification page:
+
+- Domain 1: Support GitHub Enterprise for users and key stakeholders — 9%
+- Domain 2: Manage user identities and GitHub authentication — 11%
+- Domain 3: Describe how GitHub is deployed, distributed, and licensed — 9%
+- Domain 4: Manage access and permissions based on membership — 18%
+- Domain 5: Enable secure software development and ensure compliance — 36%
+- Domain 6: Manage GitHub Actions — 16%
+
+Coverage matrix:
+
+- `exam-metadata/official-domain-coverage-matrix.md`
+
+Fork-only lab verification framework:
+
+- `LAB-VERIFICATION.md`
 
 ---
 
@@ -164,6 +219,7 @@ GH_100_Cert_Prep/
 - [GitHub Enterprise Server Documentation](https://docs.github.com/en/enterprise-server@latest)
 - [GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security)
 - [GitHub Certifications](https://examregistration.github.com/)
+- [Microsoft Learn GH-100 Certification Page](https://learn.microsoft.com/en-us/credentials/certifications/github-administration/)
 - [GitHub Skills](https://skills.github.com)
 - [GitHub Blog](https://github.blog)
 

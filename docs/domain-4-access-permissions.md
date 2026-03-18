@@ -207,6 +207,13 @@ Each team has **maintainers** who can:
 
 Team maintainers do not need to be organization owners.
 
+### Team Discussions
+
+Teams can enable discussions for team-specific coordination:
+- planning and design discussions for a functional area
+- policy announcements for a platform or security team
+- lightweight collaboration without changing repository permissions
+
 ---
 
 ## 4.5 Repository Visibility
@@ -245,6 +252,14 @@ Forks of private and internal repositories can be restricted at the organization
 
 Configure: `Org Settings > Member privileges > Fork policy`
 
+### Repository Transfer Implications
+
+When a repository moves between organizations:
+- existing access is re-evaluated against destination teams and permissions
+- destination rulesets and organization policies may apply immediately
+- visibility and forking behavior may change
+- admins should re-check Actions secrets, app installations, and environment settings
+
 ---
 
 ## 4.6 Branch Protection Rules (Classic)
@@ -280,6 +295,13 @@ Applied to: a specific branch name or a name pattern (e.g., `main`, `release/*`,
 By default, repository admins can bypass branch protection rules. The "Do not allow bypassing the above settings" checkbox removes this bypass — even admins must follow the rules.
 
 For rulesets, this is handled via **bypass actors** configuration.
+
+### Merge Queue
+
+Merge queue helps protected branches stay healthy when many PRs are ready at once:
+- pull requests are merged through a managed queue
+- required checks run against the queued merge state
+- reduces breakage caused by branch drift between approval and merge
 
 ---
 
@@ -329,6 +351,15 @@ Bypass actors are roles, teams, or apps that can bypass a ruleset:
 - Repository roles (e.g., all Maintain-level users)
 
 Configure at the ruleset level. Bypass history is logged.
+
+### Ruleset Insights
+
+Ruleset insights are used to review:
+- bypass history
+- rule evaluation outcomes
+- where specific policies are causing failures most often
+
+This is an operational advantage over classic branch protection because admins get governance visibility, not just enforcement.
 
 ### Enterprise-Level Rulesets
 
@@ -447,6 +478,16 @@ Enterprise policies override organization-level settings. Enterprise owners set 
 | OAuth App policy | No policy / All allowed / Specific apps |
 | Members can invite outside collaborators | Allow / Restrict to owners |
 | Members can change repo visibility | Allow / Restrict to owners |
+| Membership visibility | Visible / Restricted by policy |
+
+### Membership Visibility
+
+Membership visibility policies control how broadly members are exposed to non-members.
+
+This matters when an enterprise wants:
+- tighter privacy around internal user listings
+- reduced directory-style exposure
+- consistent enterprise-wide visibility defaults across organizations
 
 ---
 

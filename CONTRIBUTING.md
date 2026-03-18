@@ -1,54 +1,82 @@
 # Contributing to GH-100 Cert Prep
 
-Thank you for helping improve this study resource. Contributions that correct inaccuracies, add practice questions, update content for new GitHub features, or improve labs are all welcome.
+Thank you for helping improve this study resource.
+All contributions that improve accuracy, clarity, or coverage of exam-relevant content are welcome.
+
+> For org-wide contribution standards see the [CertPrep CONTRIBUTING guide](https://github.com/certprep/.github/blob/main/CONTRIBUTING.md).
+> Repo-specific notes are below.
 
 ---
 
-## What We Need Most
+## What We Accept
 
-1. **Accuracy corrections** — GitHub changes rapidly. If you notice something outdated, please flag it.
-2. **New practice questions** — Especially for Domain 5 (security) and Domain 6 (Actions).
-3. **Lab improvements** — More detailed steps, troubleshooting sections, or alternative approaches.
-4. **Glossary additions** — New terms or improved definitions.
-5. **Typos and formatting fixes** — Small improvements add up.
+- **Accuracy corrections** — GitHub changes rapidly. If something is outdated, flag it.
+- **New practice questions** — Must follow the question format below.
+- **Lab and demo improvements** — Clearer steps, troubleshooting sections, or alternative approaches.
+- **Better explanations** — Simpler, more precise descriptions of complex concepts.
+- **Glossary additions** — New terms or improved definitions.
+- **Script improvements** — Error handling, portability, or additional API examples.
+- **Typos and formatting fixes** — Small improvements add up.
+
+## What We Do Not Accept
+
+- Content copied verbatim from official documentation (paraphrase and cite instead)
+- Practice questions without answer explanations
+- Speculative content not tied to official exam objectives
+- Changes that remove accurate content without explanation
+- Content referencing deprecated features as current (flag them as deprecated instead)
+- Third-party tool promotions outside the GitHub ecosystem
 
 ---
 
 ## How to Contribute
 
-### Step 1 — Open an Issue First (for substantial changes)
+### For Small Changes
 
-Before writing a large PR, open an issue describing what you want to change and why. This avoids duplicate effort and lets maintainers give early feedback.
+Typos, dead links, minor wording — open a PR directly.
 
-For small changes (typos, dead links, minor wording), you can open a PR directly.
+### For Substantial Changes
 
-### Step 2 — Fork and Branch
+**Step 1 — Open an Issue First**
+
+Describe what you want to change and why. This prevents duplicate effort and allows early feedback.
+
+**Step 2 — Fork and Branch**
 
 ```bash
-# Fork the repository on GitHub, then:
 git clone https://github.com/YOUR_USERNAME/GH_100_Cert_Prep.git
 cd GH_100_Cert_Prep
 
-# Create a descriptive branch
-git checkout -b fix/domain5-secret-scanning-accuracy
+# Use a descriptive branch name
+git checkout -b fix/brief-description
 # or
-git checkout -b add/domain6-practice-questions
+git checkout -b add/brief-description
 ```
 
-### Step 3 — Make Your Changes
+**Step 3 — Make Your Changes**
 
 Follow the content standards below, then commit with a clear message:
 
 ```bash
-git add docs/domain-5-security-compliance.md
-git commit -m "fix: update push protection setup steps for enterprise level"
+git add path/to/changed-file.md
+git commit -m "fix: short description of what changed and why"
 ```
 
-### Step 4 — Open a Pull Request
+**Step 4 — Open a Pull Request**
 
-- Use the PR template provided
 - Reference any related issues
 - Summarize what changed and why
+- Confirm the content is accurate against official documentation
+
+### Fork-Only Lab Verification
+
+If you are using this repository as a **training fork**, you can use the built-in lab verification framework:
+
+- open a lab issue from `.github/ISSUE_TEMPLATE/lab-exercise.yml`
+- submit a PR using `.github/pull_request_template.md`
+- include a markdown evidence file under `lab-submissions/<lab-id>/`
+
+This workflow is intentionally designed to run only in **forked repositories**.
 
 ---
 
@@ -58,16 +86,14 @@ git commit -m "fix: update push protection setup steps for enterprise level"
 
 - All technical content must reflect current GitHub documentation
 - Link to the relevant [GitHub Docs](https://docs.github.com) page when adding new topics
-- If you are not certain something is current, add a note: `> Note: Verify this against current GitHub Docs — this feature may have changed.`
-- Never guess at behavior. If unsure, research or leave it out.
+- If you are uncertain about something, add: `> Note: Verify this against current GitHub Docs — this may have changed.`
+- Never guess at behavior. Research it or leave it out.
 
 ### Domain Weight Respect
 
-Content depth should reflect exam weights:
-- Domain 5 (36%) — exhaustive coverage
-- Domain 4 (18%) and Domain 6 (16%) — thorough coverage
-- Domain 2 (11%) — solid coverage
-- Domain 1 (9%) and Domain 3 (9%) — concise but complete
+Content depth should reflect official exam domain weights.
+Heavier domains deserve proportionally deeper coverage.
+Refer to `exam-metadata/` for domain weights.
 
 ### Terminology
 
@@ -84,9 +110,19 @@ Use GitHub's exact terminology. Common correct terms:
 | GitHub Enterprise Server (GHES) | self-hosted GitHub |
 | Dependabot alerts | vulnerability alerts (old name) |
 
-### Practice Questions Format
+### Markdown Formatting
 
-All practice questions must follow this exact format:
+- Use ATX-style headers (`#`, `##`, `###`)
+- Use fenced code blocks with language identifiers (` ```bash `, ` ```yaml `, ` ```python `)
+- Use tables for comparisons, not prose lists
+- Use `<details>/<summary>` for collapsible answer sections
+- Use GitHub admonitions for exam tips: `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`, `> [!IMPORTANT]`
+- Keep lines under 120 characters where possible
+- One blank line before and after headings
+
+### Practice Question Format
+
+All practice questions must follow this format:
 
 ```markdown
 ### Question N
@@ -94,7 +130,7 @@ All practice questions must follow this exact format:
 **Topic**: [Specific sub-topic]
 **Difficulty**: Beginner | Intermediate | Advanced
 
-[Question text]
+[Question text — 2–4 sentence business scenario]
 
 A. [Option A]
 B. [Option B]
@@ -106,50 +142,46 @@ D. [Option D]
 
 **Correct Answer: X**
 
-**Explanation**: [Detailed explanation of why the answer is correct and why other options are wrong]
+**Explanation**: [Why the answer is correct and why other options are wrong]
 
 **Reference**: [Link to GitHub Docs]
 </details>
 ```
 
 Requirements:
-- Each question must have exactly one correct answer (or clearly specify "select all that apply")
+
+- Exactly one correct answer (or clearly specify "select all that apply")
 - Explanations must teach the concept, not just repeat the answer
-- Difficulty must be accurate (Beginner = recall, Intermediate = application, Advanced = analysis/scenario)
-- Questions must be unambiguous — if reviewers disagree on the answer, the question needs revision
-
-### Markdown Formatting
-
-- Use ATX-style headers (`#`, `##`, etc.)
-- Use fenced code blocks with language specifiers (` ```bash `, ` ```yaml `, etc.)
-- Use tables for comparisons
-- Use `<details>/<summary>` for collapsible answer sections in practice questions
-- Keep lines under 120 characters where possible
-- One blank line between sections
-
----
-
-## What We Will NOT Merge
-
-- Content copied verbatim from GitHub documentation (paraphrase and cite instead)
-- Practice questions without answer explanations
-- Speculative content that is not verifiable against GitHub Docs
-- Changes that remove accurate content without explanation
-- Content that refers to deprecated features as current (flag it as deprecated instead)
+- Difficulty: Beginner = recall, Intermediate = application, Advanced = analysis/scenario
+- Questions must be unambiguous — if reviewers disagree on the answer, revise it
 
 ---
 
 ## Reporting Issues
 
-If you find inaccurate content but do not have time to fix it, please open an issue with:
+If you find inaccurate content but cannot fix it, open an issue with:
 
 1. The file and section where the inaccuracy exists
 2. What the current (incorrect) content says
 3. What the correct content should say
-4. A link to the GitHub Docs page that confirms the correction
+4. A link to the official documentation that confirms the correction
+
+---
+
+## Security
+
+If you discover a real security issue in this repository, do **not** open a public issue.
+Follow the process in [SECURITY.md](https://github.com/certprep/.github/blob/main/SECURITY.md).
+
+---
+
+## Code of Conduct
+
+Be respectful. Everyone here is learning.
 
 ---
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the MIT License that covers this repository.
+By contributing, you agree that your contributions will be licensed under the
+[MIT License](LICENSE) that covers this repository.

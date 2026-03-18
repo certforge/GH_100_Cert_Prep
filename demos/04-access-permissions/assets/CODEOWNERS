@@ -1,0 +1,12 @@
+# Global default
+* @octo-org/platform-admins
+
+# Application code
+/src/ @octo-org/app-team
+
+# Infrastructure and workflow policy
+/.github/ @octo-org/platform-admins
+/infra/ @octo-org/platform-admins @octo-org/security
+
+# Docs
+/docs/ @octo-org/docs

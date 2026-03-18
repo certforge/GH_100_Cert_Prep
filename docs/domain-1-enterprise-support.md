@@ -90,6 +90,15 @@ ghe-diagnostics > /tmp/diagnostics.json
    - **Webhook**: POST to your endpoint for each status update
    - **SMS** (via third-party Statuspage integration)
 
+### GitHub Changelog, Roadmap, and API Lifecycle
+
+Admins should monitor GitHub change channels in addition to the status page:
+- **GitHub Changelog** for feature releases and behavior changes
+- **GitHub Roadmap** for upcoming features that may affect rollout planning
+- **API changelog and deprecation notices** for integrations and automation
+
+This matters when preparing stakeholder communications or validating whether internal tooling may need changes before a feature rollout or deprecation date.
+
 ### Exam Tip
 
 When a user reports "GitHub is down," the correct first step for an admin is to **check status.github.com** before opening a support ticket.
@@ -239,6 +248,7 @@ Streaming is configured at the **enterprise level**, not the organization level.
 | GitHub Roadmap | github.com/orgs/github/projects/4247 | Upcoming features |
 | GitHub Docs | docs.github.com | Official product documentation |
 | GitHub Status | status.github.com | Service health |
+| API changelog / deprecations | docs.github.com + developer notices | Breaking changes affecting apps, scripts, and integrations |
 
 ### Internal Communication Best Practices
 
@@ -246,6 +256,7 @@ Streaming is configured at the **enterprise level**, not the organization level.
 - Pin important announcements to organization README (`.github` repo)
 - Notify users before enforcing new security policies (SAML SSO, 2FA) via email
 - Create a runbook wiki for common admin procedures
+- Communicate API or Marketplace integration deprecations before effective dates
 
 ---
 

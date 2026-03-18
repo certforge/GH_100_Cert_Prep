@@ -1,0 +1,54 @@
+name: GH-100 Lab Exercise
+description: Track a lab run in your fork and link the verification PR.
+title: "lab: <domain> - <short summary>"
+labels:
+  - lab
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this issue in your **forked repo** to track one GH-100 lab attempt.
+        The verification workflow expects the matching PR to include:
+
+        - `Lab-ID: <official-lab-id>` in the PR body
+        - `Issue: #<number>` in the PR body
+        - a submission file under `lab-submissions/<lab-id>/`
+  - type: dropdown
+    id: lab_id
+    attributes:
+      label: Lab ID
+      description: Choose the official lab this issue tracks.
+      options:
+        - domain-1-enterprise-support
+        - domain-2-identity-authentication
+        - domain-3-deployment-licensing
+        - domain-4-access-permissions
+        - domain-5-security-compliance
+        - domain-6-github-actions
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What are you verifying in this lab run?
+      placeholder: I am verifying CODEOWNERS + ruleset behavior for Domain 4.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_plan
+    attributes:
+      label: Evidence Plan
+      description: What evidence will your PR include?
+      placeholder: Screenshots, gh api output, changed workflow file, submission markdown.
+    validations:
+      required: true
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Readiness
+      options:
+        - label: I am running this in a forked repository.
+          required: true
+        - label: I will open a PR with a linked submission file under `lab-submissions/`.
+          required: true

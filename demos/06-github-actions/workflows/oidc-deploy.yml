@@ -1,0 +1,19 @@
+name: OIDC Deploy Example
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure cloud credentials via OIDC
+        run: echo "Exchange OIDC token with cloud provider here"

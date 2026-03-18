@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: General content correction
+    url: https://github.com/certprep/.github/blob/main/CONTRIBUTING.md
+    about: Use a normal contribution workflow for repo-content changes unrelated to forked lab verification.

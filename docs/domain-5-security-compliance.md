@@ -207,6 +207,15 @@ For some secret types, GitHub can check whether the detected secret is still val
 
 This helps prioritize alert remediation.
 
+### Secret Scanning Notifications
+
+Detection is only useful if the right people see it. In practice, enterprises combine:
+- repository-level alert visibility
+- organization and enterprise security overview monitoring
+- email and standard GitHub notifications for maintainers and security responders
+
+If the requirement is "make sure responders know when a secret is found," think about both detection and notification flow.
+
 ---
 
 ## 5.3 Dependabot
@@ -833,6 +842,13 @@ gh api orgs/ORG/ip-allow-list-entries -X POST \
 ```
 
 **Note**: When IP allow lists are enabled, ALL access (web, API, Git) is restricted to the listed ranges. Ensure you add all CI/CD runner IPs, VPN ranges, and office ranges before enabling.
+
+### Compliance Documentation and Trust Center
+
+Audit logs are only one part of compliance readiness. Admins should also know where GitHub publishes assurance material:
+- GitHub Trust Center
+- compliance documentation for controls and attestations
+- references to programs such as SOC 2 and FedRAMP, depending on product and environment
 
 ---
 

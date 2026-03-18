@@ -1,0 +1,99 @@
+name: GH-100 Lab Verification
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  issues:
+    types: [opened, edited, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  fork-status:
+    name: Detect Fork Context
+    runs-on: ubuntu-latest
+    outputs:
+      is_fork: ${{ steps.detect.outputs.is_fork }}
+    steps:
+      - name: Detect whether this repository is a fork
+        id: detect
+        run: |
+          if [ "${{ github.event.repository.fork }}" = "true" ]; then
+            echo "is_fork=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_fork=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  verify-pr:
+    name: Verify Lab PR
+    needs: fork-status
+    if: >
+      needs.fork-status.outputs.is_fork == 'true' &&
+      github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify PR submission
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: bash scripts/lab/verify-pr.sh
+
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gh100-lab-verification-report
+          path: scripts/output/lab-verification-report.md
+          if-no-files-found: ignore
+          retention-days: 7
+
+  issue-guidance:
+    name: Post Issue Guidance
+    needs: fork-status
+    if: >
+      needs.fork-status.outputs.is_fork == 'true' &&
+      github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment with fork-only lab instructions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = [
+              'Fork-only lab verification is active for this repository.',
+              '',
+              'Next step:',
+              '- open a PR from this fork',
+              '- include `Lab-ID: <official-lab-id>` in the PR body',
+              '- include `Issue: #' + context.payload.issue.number + '` in the PR body',
+              '- add a submission file under `lab-submissions/<lab-id>/`',
+              '',
+              'The PR workflow validates structure and basic lab evidence.'
+            ].join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body
+            });
+
+  upstream-noop:
+    name: Upstream Repository No-Op
+    needs: fork-status
+    if: needs.fork-status.outputs.is_fork != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip in upstream repo
+        run: |
+          echo "GH-100 lab verification is intentionally active only in forked repositories."

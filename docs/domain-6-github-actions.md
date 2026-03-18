@@ -132,6 +132,8 @@ sudo ./svc.sh start
 ./run.sh
 ```
 
+**Registration tokens are short-lived**. Generate them immediately before registration and do not treat them as reusable credentials.
+
 ### Runner Labels
 
 Labels allow workflows to target specific runners:
@@ -181,6 +183,19 @@ Security best practices:
 4. Do not store persistent secrets on runner machines
 5. Network-isolate runners from production systems
 6. For public repos, prefer GitHub-hosted runners
+
+### Runner Removal and Lifecycle
+
+Admins should also manage runner retirement and recovery:
+- remove runners when a host is decommissioned
+- recreate runners after suspected compromise
+- keep runner binaries updated
+- verify proxy and outbound networking after upgrades
+
+```bash
+# Remove runner registration from the host
+./config.sh remove --token REGISTRATION_TOKEN
+```
 
 ---
 
@@ -261,6 +276,13 @@ Required workflows are organization-level policies that force specific Actions w
    - Target repositories (all repos or selected repos)
 
 **The source workflow must have `workflow_call` as a trigger** — but actually for required workflows, the workflow is called directly, not as a reusable workflow. The workflow must be in a public repository or an internal repository within the enterprise.
+
+### Required Workflow Bypass and Scope
+
+Required workflows are policy controls:
+- repository admins cannot casually disable them when set by the organization
+- source workflow ownership matters because one change can affect many repositories
+- any bypass should be treated as a formal policy exception, not standard repository autonomy
 
 ### Required Workflow Example
 
@@ -369,6 +391,19 @@ gh secret set MY_SECRET --org ORG --visibility selected \
 - Environment secrets are ONLY available when a job explicitly targets the environment
 - Secrets are masked in logs (replaced with `***`)
 - Secrets cannot be accessed in workflows triggered by forked PRs (by default — this is a security control)
+
+### Third-Party Vaults
+
+Enterprises often combine Actions with external secret managers:
+- HashiCorp Vault
+- Azure Key Vault
+- AWS Secrets Manager
+- Google Secret Manager
+
+Common pattern:
+1. Use OIDC or another short-lived identity to authenticate
+2. Fetch secrets just in time
+3. Avoid storing long-lived credential copies in GitHub when policy requires external rotation
 
 ### Accessing Org Secrets from a Repository
 
@@ -670,6 +705,15 @@ Configure per repository:
 ```
 Repo Settings > Actions > General > Artifact and log retention
 ```
+
+### Monitoring and Troubleshooting Runners
+
+Common admin troubleshooting areas:
+- runner offline versus busy state
+- label mismatch causing jobs to remain queued
+- group-scope restrictions blocking repository access
+- proxy or firewall issues blocking outbound calls
+- outdated runner versions
 
 ### Actions Cache
 
